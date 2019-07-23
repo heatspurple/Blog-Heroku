@@ -1,0 +1,47 @@
+*{
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+body,
+div,
+ul,li{
+  margin:0;
+  padding:0;
+}
+
+.logo {
+  text-align: center;
+}
+
+#write-and-list-controlpanel{
+  padding: 10px 0;
+  border-top-style: solid;
+  border-bottom-style: dotted;
+}
+
+#post-title{
+  width: 100%;
+}
+
+#post-body{
+  width: 100%;
+}
+
+#read-border{
+  border-bottom: 6px solid white;
+  background-color: lightblue;
+}
+
+.post-items-body span{
+  font-size: 25px;
+}
+
+
+/* 태그는 아무것도 없이, class는 . id는 # 
+ex) .logo span {... = logo클래스 안의 span 이라는 의미*/

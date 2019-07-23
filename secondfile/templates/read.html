@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    {% for post_post in posts %}
+    <br>
+    <br>
+    <a id="read-border" href="{% url 'detail' post_post.id %}">
+        <h5>글 제목</h5>
+        <h1>{{ post_post.title }}</h1>
+        <h5>글 내용</h5>
+        <h2>{{ post_post.body }}</h2>
+    </a>
+    <br>
+    {% endfor %}
+    {% else %}
+    <div class="login-now-if-you-dont">
+        <meta http-equiv="refresh" content="0;url={% url 'login' %}" />
+    </div>
+{% endif %}
+{% endblock %}

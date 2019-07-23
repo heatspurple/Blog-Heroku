@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <form method="post" action="{% url 'update' renew.id %}" id="post-form" enctype="multipart/form-data">
+    {% csrf_token %}
+    <br>
+    <br>
+    <div class="input-container">
+        <label class="post-label" for="post-title">글 제목</label>
+        <input type="text" id="post-title" name="post_title" cols="10" value="{{ renew.title }}">
+    </div>
+    <br>
+    <div class="input-container2">
+        <label class="post-label" for="post-body">글 내용</label>
+        <br>
+        <textarea id="post-body" name="post_body" id="post-body" cols="30" rows="10">{{ renew.body }}</textarea>
+    </div>
+    <br>
+    <div class="input-container">
+        <input class="form-control" type="file" id="image" name="image">
+    </div>
+    <br>
+    <br>
+    <div class="input-container3">
+        <button type="button" class="btn btn-secondary btn-lg btn-block" form="post-form" type="submit">수정하기</button>
+    </div>
+    <br>
+    </form>
+{% else %}
+    <div class="login-now-if-you-dont">
+        <meta http-equiv="refresh" content="0;url={% url 'login' %}" />
+    </div>
+{% endif %}
+{% endblock %}

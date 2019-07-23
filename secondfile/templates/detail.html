@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <br>
+    <div class="post-items">
+        <div class="post-items-body">
+            <span class="post-title"> 제목 : {{ post.title }}</span>
+            <br>
+            <span class="post-date"> 날짜 : {{ post.pub_date }}</span>
+            <br>
+            <br>
+            <span class="post-body">내용 : {{ post.body }}</span>
+            <br>
+            <br>
+        </div>
+        <br>
+    <div class="post-items-img">
+        <span class="post-img">
+            {% if post.image %}
+                <img src="{{ post.image.url }}" alt="">
+             {% else %}
+                <img src="" alt="사진없음">
+            {% endif %}
+        </span>
+    </div>
+    <br>
+    <a href="{% url 'renew' post.id %}">글 수정하기</a>
+    <form action="{% url 'delete' post.id %}" id="post-delete" method="POST">
+        {% csrf_token %}
+    </form>
+    <br>
+    <input form="post-delete" type="submit" class="delete" value="글 삭제하기">
+    <a href="{% url 'home' %}">돌아가기</a>
+</div>
+{% else %}
+<div class="login-now-if-you-dont">
+    <meta http-equiv="refresh" content="0;url={% url 'login' %}" />
+</div>
+{% endif %}
+{% endblock %}

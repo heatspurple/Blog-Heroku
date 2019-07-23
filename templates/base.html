@@ -1,0 +1,52 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<link rel="stylesheet" href="{% static 'home.css' %}">-->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="alert alert-light" role="alert">
+        <h2 class="logo">LikeLion X 7th X CNU <span class="badge badge-danger">Exclusive!</span></h2>
+    </div>
+    <div class="container-fluid">
+        <ul class="nav justify-content-end" id="write-and-list-controlpanel">
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'home' %}" >글쓰기</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'read' %}" >글목록</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class = "nav-item">
+                <a class="nav-link active"> 반갑습니다. {{ user.username }}님</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="javascript:{document.getElementById('logout').submit()}">로그아웃!</a>
+                <form id="logout" method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %} <input type=hidden>
+                </form>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'login' %}">로그인</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'signup' %}">회원가입</a>
+            </li>
+            {% endif %}
+        </ul>
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>
